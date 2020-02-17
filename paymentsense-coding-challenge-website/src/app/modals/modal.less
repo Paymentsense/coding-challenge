@@ -1,18 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/theming';
-
-@include mat-core();
-
-$default-theme-primary: mat-palette($mat-indigo);
-$default-theme-accent:  mat-palette($mat-grey);
-$default-theme: mat-light-theme($default-theme-primary, $default-theme-accent);
-@include angular-material-theme($default-theme);
-
-@import '~@swimlane/ngx-datatable/index.scss';
-@import '~@swimlane/ngx-datatable/themes/material.css';
-@import '~@swimlane/ngx-datatable/assets/icons.css';
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* MODAL STYLES
+-------------------------------*/
 modal {
     /* modals are hidden by default */
     display: none;

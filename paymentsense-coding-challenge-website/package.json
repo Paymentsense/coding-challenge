@@ -28,7 +28,8 @@
     "core-js": "^2.5.4",
     "rxjs": "~6.5.2",
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "@swimlane/ngx-datatable": "^16.0.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.8",

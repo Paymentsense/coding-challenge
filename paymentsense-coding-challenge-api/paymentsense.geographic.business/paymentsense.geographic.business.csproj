@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\paymentsense.common\paymentsense.common.csproj" />
+    <ProjectReference Include="..\paymentsense.utility\paymentsense.utility.csproj" />
+  </ItemGroup>
+
+</Project>
