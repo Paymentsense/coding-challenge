@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }    from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,7 +28,11 @@ import { ModalService } from './modals/modal.service';
     HttpClientModule,
     FontAwesomeModule,
     NgxDatatableModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot([
+      // { path: '', component: AppComponent },
+      { path: 'countrylist', component: LstCountryComponent }
+    ], { onSameUrlNavigation: 'reload' }),
   ],
   providers: [PaymentsenseCodingChallengeApiService,PaymentsenseGeographyService,ModalService],
   bootstrap: [AppComponent]

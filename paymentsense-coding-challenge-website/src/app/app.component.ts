@@ -1,6 +1,7 @@
 import { Component,OnInit  } from '@angular/core';
 import { PaymentsenseCodingChallengeApiService } from './services';
 import { take } from 'rxjs/operators';
+import { Router, ActivatedRoute } from "@angular/router";
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
 import { PaymentsenseGeographyService } from './geography/services/paymentsense-geography.service';
 
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit {
   public paymentsenseCodingChallengeApiActiveIconColour = 'red';
   public showCountry:boolean=false;
 
-  constructor(private paymentsenseCodingChallengeApiService: PaymentsenseCodingChallengeApiService,private geographyservice:PaymentsenseGeographyService) {
+  constructor(private paymentsenseCodingChallengeApiService: PaymentsenseCodingChallengeApiService,private geographyservice:PaymentsenseGeographyService,private router: Router, private route: ActivatedRoute) {
     paymentsenseCodingChallengeApiService.getHealth().pipe(take(1))
     .subscribe(
       apiHealth => {
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit {
   }
   public showCountryClick():void
   {
+    this.router.navigateByUrl('/countrylist', { relativeTo: this.route });
     this.showCountry=true;
   }
 }
