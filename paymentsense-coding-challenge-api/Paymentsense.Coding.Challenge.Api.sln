@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paymentsense.Coding.Challen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paymentsense.Coding.Challenge.Api.Tests", "Paymentsense.Coding.Challenge.Api.Tests\Paymentsense.Coding.Challenge.Api.Tests.csproj", "{29B33764-7D72-4940-90F9-28467B569288}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paymentsense.geographic.business", "paymentsense.geographic.business\paymentsense.geographic.business.csproj", "{019F8FA6-93A7-4C67-B1F2-B94621C73375}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paymentsense.geographic.business", "paymentsense.geographic.business\paymentsense.geographic.business.csproj", "{019F8FA6-93A7-4C67-B1F2-B94621C73375}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paymentsense.common", "paymentsense.common\paymentsense.common.csproj", "{77EA15B9-720C-4BCA-BDF5-33911F73E179}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paymentsense.common", "paymentsense.common\paymentsense.common.csproj", "{77EA15B9-720C-4BCA-BDF5-33911F73E179}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paymentsense.utility", "paymentsense.utility\paymentsense.utility.csproj", "{FAC3A7F9-3FC6-42CE-9658-2436A4D643E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paymentsense.utility", "paymentsense.utility\paymentsense.utility.csproj", "{FAC3A7F9-3FC6-42CE-9658-2436A4D643E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
