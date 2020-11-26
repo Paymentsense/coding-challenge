@@ -1,0 +1,87 @@
+<section id="countrylist" style="padding-left: 300px;padding-top: 55px;width: 70%; padding-bottom: 50px;">
+
+
+<h1>
+    Bellow are the available country list:
+</h1>
+<div *ngIf="countries && countries.length>0">
+    <ngx-datatable
+        class="material"
+        [rows]="countries"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="60"
+        [limit]="10">
+        <ngx-datatable-column name="name">
+          <ng-template let-column="column" ngx-datatable-header-template> Country Name </ng-template>
+          <ng-template  let-row="row" let-value="value" ngx-datatable-cell-template>
+            <a [routerLink]="" (click)="openModal('custom-modal-1',row)" style="cursor:pointer;text-decoration: none;">{{ value }}</a>
+            <strong></strong>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="flag">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            Flag Image
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <img src={{value}}  style="width: 30%;height: 50px;"/>
+          </ng-template>
+        </ngx-datatable-column>
+        <!-- <ngx-datatable-column>
+            <ng-template let-column="column" ngx-datatable-header-template>
+                Actions
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <button class="btn btn-info" (click)="openModal('custom-modal-1')">Show More</button>
+              </ng-template>
+        </ngx-datatable-column> -->
+      </ngx-datatable>
+    </div>
+    <div *ngIf="isFetchingData">
+      <span>Plesae wit...</span>
+    </div>
+    <modal id="custom-modal-1" *ngIf="country">
+      <div class="modal" style="padding-left: 150px;padding-right: 150px;">
+          <div class="modal-body">
+              <h3 style="text-align: center;">{{country.name}}</h3>
+                <hr />
+              <div>
+                <strong>Population:</strong><span style="padding-left: 10px;">{{country.population}}</span>
+              </div>
+              <div>
+                <strong>Time Zone:</strong>
+                <ul *ngFor="let t of country.timezones">
+                  <li>{{t}}</li>
+                </ul>
+              </div>
+              <div>
+                <strong>Currency:</strong>
+                <ul *ngFor="let c of country.currencies">
+                  <li>{{c.name}} ({{c.symbol}})</li>
+                </ul>
+              </div>
+              <div>
+                <strong>Languages:</strong>
+                <ul *ngFor="let l of country.languages">
+                  <li>{{l.name}} ({{l.nativeName}})</li>
+                </ul>
+              </div>
+              <div>
+                <strong>Capital City:</strong>
+                <span style="padding-left: 10px;">{{country.capital}}</span>
+              </div>
+              <div>
+                <strong>Bordering Countries:</strong>
+                <ul *ngFor="let b of country.borders">
+                  <li>{{b}}</li>
+                </ul>
+              </div>
+              <div style="align-items: center;margin-top: 50px;">
+              <button (click)="closeModal('custom-modal-1');" style="text-align: center;margin-top: 50px;">Close</button>
+            </div>
+          </div>
+      </div>
+      <div class="modal-background"></div>
+  </modal>
+</section>

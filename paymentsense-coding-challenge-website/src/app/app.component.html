@@ -8,4 +8,11 @@
                                                         [styles]="{ 'stroke': paymentsenseCodingChallengeApiActiveIconColour, 'color': paymentsenseCodingChallengeApiActiveIconColour }"></fa-icon> ...</h2>
 </div>
 
+<section id="countryList" style="padding-left: 300px;padding-top: 55px;width: 70%; padding-bottom: 50px;">
+  <h3 *ngIf="!showCountry"> Click on bellow button to show list of available countries</h3>
+  <button type="button" class="btn btn-primary" (click)="showCountryClick()" *ngIf="!showCountry"> Show Countries </button>
+  <!-- <country-list *ngIf="showCountry">
+
+  </country-list> -->
+</section>
 <router-outlet></router-outlet>
