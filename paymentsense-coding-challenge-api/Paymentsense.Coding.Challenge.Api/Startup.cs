@@ -32,9 +32,12 @@ namespace Paymentsense.Coding.Challenge.Api
                 });
             });
 
+            // Register country data provider
             services.AddScoped<ICountryDataProvider, CountryDataProvider>();
             services.AddHttpClient();
 
+            // Enable response caching
+            services.AddResponseCaching();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +61,9 @@ namespace Paymentsense.Coding.Challenge.Api
                 endpoints.MapControllers();
                 endpoints.MapHealthChecks("/health");
             });
+
+            // Activate response caching middleware
+            app.UseResponseCaching();
         }
     }
 }

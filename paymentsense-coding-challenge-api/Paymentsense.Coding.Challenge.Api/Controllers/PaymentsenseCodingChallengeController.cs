@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Paymentsense.Coding.Challenge.Api.Interfaces;
 
@@ -21,6 +22,7 @@ namespace Paymentsense.Coding.Challenge.Api.Controllers
             return Ok("Paymentsense Coding Challenge!");
         }
 
+        [ResponseCache(Duration = int.MaxValue)]
         [Route("countries/list")]
         [HttpGet]
         public async Task<ActionResult> CountryList()
