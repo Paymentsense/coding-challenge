@@ -10,6 +10,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CountryListComponent } from "./country-list/country-list.component";
 import { CountryDataProviderService } from "./services/country-data-provider.service";
 import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
   declarations: [AppComponent, CountryListComponent],
@@ -20,6 +21,7 @@ import { MatTableModule } from "@angular/material/table";
     HttpClientModule,
     FontAwesomeModule,
     MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [
     PaymentsenseCodingChallengeApiService,

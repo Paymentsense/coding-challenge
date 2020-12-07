@@ -1,8 +1,10 @@
 import { CountryDataProviderService } from "./../services/country-data-provider.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Country } from "../models/country";
 import { Subject } from "rxjs";
 import { takeUntil, tap, catchError, finalize } from "rxjs/operators";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: "country-list",
@@ -10,10 +12,17 @@ import { takeUntil, tap, catchError, finalize } from "rxjs/operators";
   styleUrls: ["./country-list.component.scss"],
 })
 export class CountryListComponent implements OnInit {
-  public countryList: Country[] = [];
+  public countryList: any;
   public columnsToDisplay: string[] = ["flag", "name"];
   public loading = false;
   private unsubscribe$ = new Subject<boolean>();
+  @ViewChild(MatPaginator, { static: false }) set matPaginator(
+    paginator: MatPaginator
+  ) {
+    if (this.countryList) {
+      this.countryList.paginator = paginator;
+    }
+  }
 
   constructor(private countryDataProviderService: CountryDataProviderService) {}
 
@@ -28,7 +37,7 @@ export class CountryListComponent implements OnInit {
       .pipe(
         takeUntil(this.unsubscribe$),
         tap((data: Country[]) => {
-          this.countryList = data;
+          this.countryList = new MatTableDataSource<Country>(data);
         }),
         catchError((error: any) => {
           console.error(error);
