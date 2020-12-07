@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-12 text-center" *ngIf="countryList?.length === 0">
+    <p class="text-muted">No country found</p>
+  </div>
+</div>
+<div *ngIf="countryList?.length !== 0">
+  <div class="text-center">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            Flag
+          </th>
+          <th>
+            Country
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let country of countryList">
+          <td>
+            <img
+              class="rounded-circle"
+              style="width: 40px;"
+              [src]="country.flag"
+              alt="logo"
+            />
+          </td>
+          <td>
+            {{ country.name }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
