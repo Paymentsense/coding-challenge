@@ -5,11 +5,30 @@ import { Subject } from "rxjs";
 import { takeUntil, tap, catchError, finalize } from "rxjs/operators";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from "@angular/animations";
+import { Currency } from "../models/currency";
+import { Language } from "../models/language";
 
 @Component({
   selector: "country-list",
   templateUrl: "./country-list.component.html",
   styleUrls: ["./country-list.component.scss"],
+  animations: [
+    trigger("detailExpand", [
+      state("collapsed", style({ height: "0px", minHeight: "0" })),
+      state("expanded", style({ height: "*" })),
+      transition(
+        "expanded <=> collapsed",
+        animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")
+      ),
+    ]),
+  ],
 })
 export class CountryListComponent implements OnInit {
   public countryList: any;
@@ -23,6 +42,7 @@ export class CountryListComponent implements OnInit {
       this.countryList.paginator = paginator;
     }
   }
+  expandedElement: Country | null;
 
   constructor(private countryDataProviderService: CountryDataProviderService) {}
 
@@ -48,5 +68,13 @@ export class CountryListComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  getCurrencies(currencies: Currency[]): string {
+    return currencies.map((c) => c.name).join(",");
+  }
+
+  getLanguages(languages: Language[]): string {
+    return languages.map((l) => l.name).join(",");
   }
 }
