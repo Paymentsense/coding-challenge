@@ -2,7 +2,7 @@ import { CountryDataProviderService } from "./../services/country-data-provider.
 import { Component, OnInit } from "@angular/core";
 import { Country } from "../models/country";
 import { Subject } from "rxjs";
-import { takeUntil, tap, catchError } from "rxjs/operators";
+import { takeUntil, tap, catchError, finalize } from "rxjs/operators";
 
 @Component({
   selector: "country-list",
@@ -11,6 +11,8 @@ import { takeUntil, tap, catchError } from "rxjs/operators";
 })
 export class CountryListComponent implements OnInit {
   public countryList: Country[] = [];
+  public columnsToDisplay: string[] = ["flag", "name"];
+  public loading = false;
   private unsubscribe$ = new Subject<boolean>();
 
   constructor(private countryDataProviderService: CountryDataProviderService) {}
@@ -20,6 +22,7 @@ export class CountryListComponent implements OnInit {
   }
 
   getCountryList() {
+    this.loading = true;
     this.countryDataProviderService
       .getCountryList()
       .pipe(
@@ -30,6 +33,9 @@ export class CountryListComponent implements OnInit {
         catchError((error: any) => {
           console.error(error);
           return null;
+        }),
+        finalize(() => {
+          this.loading = false;
         })
       )
       .subscribe();

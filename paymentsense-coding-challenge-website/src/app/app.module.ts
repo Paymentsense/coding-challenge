@@ -9,6 +9,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CountryListComponent } from "./country-list/country-list.component";
 import { CountryDataProviderService } from "./services/country-data-provider.service";
+import { MatTableModule } from "@angular/material/table";
 
 @NgModule({
   declarations: [AppComponent, CountryListComponent],
@@ -18,6 +19,7 @@ import { CountryDataProviderService } from "./services/country-data-provider.ser
     BrowserAnimationsModule,
     HttpClientModule,
     FontAwesomeModule,
+    MatTableModule,
   ],
   providers: [
     PaymentsenseCodingChallengeApiService,
