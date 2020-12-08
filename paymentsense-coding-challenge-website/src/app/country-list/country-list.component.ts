@@ -1,7 +1,7 @@
 import { CountryDataProviderService } from "./../services/country-data-provider.service";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Country } from "../models/country";
-import { Subject } from "rxjs";
+import { Subject, of } from "rxjs";
 import { takeUntil, tap, catchError, finalize } from "rxjs/operators";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
@@ -61,7 +61,7 @@ export class CountryListComponent implements OnInit {
         }),
         catchError((error: any) => {
           console.error(error);
-          return null;
+          return of();
         }),
         finalize(() => {
           this.loading = false;

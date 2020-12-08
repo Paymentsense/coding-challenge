@@ -1,16 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { CountryListComponent } from "./country-list.component";
+import { RouterTestingModule } from "@angular/router/testing";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { HttpClientModule } from "@angular/common/http";
 
-import { CountryListComponent } from './country-list.component';
-
-describe('CountryListComponent', () => {
+describe("CountryListComponent", () => {
   let component: CountryListComponent;
   let fixture: ComponentFixture<CountryListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CountryListComponent ]
-    })
-    .compileComponents();
+      imports: [
+        RouterTestingModule,
+        FontAwesomeModule,
+        MatTableModule,
+        MatPaginatorModule,
+        HttpClientModule,
+      ],
+      declarations: [CountryListComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +29,7 @@ describe('CountryListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
