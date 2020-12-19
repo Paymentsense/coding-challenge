@@ -18,7 +18,7 @@ namespace Paymentsense.Coding.Challenge.Api.Controllers
 
         [HttpGet]
         [Route("all")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAll()
         {
             var countries = await _countryServices.GetAllAsync();
 
