@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CountryService } from 'src/app/services';
 
 @Component({
   selector: 'app-country-detail',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CountryDetailComponent implements OnInit {
 
-  constructor() { }
+  alpha3Code:string;
+  selectedCountry:any;
+  constructor( private countryService: CountryService,   private route: ActivatedRoute,) { 
+
+    this.alpha3Code = route.snapshot.params.id;
+
+  }
 
   ngOnInit() {
+    this.getSelectedCountry();
+  }
+  getSelectedCountry() {
+    this.countryService.GetAllCountries().subscribe((data) => {
+    });
   }
 
 }
