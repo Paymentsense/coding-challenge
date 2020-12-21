@@ -16,6 +16,7 @@ namespace Paymentsense.Coding.Challenge.Api.Controllers
             _countryServices = _lazyCountryServices.Value;
         }
 
+        [ResponseCache(Duration = int.MaxValue)]
         [HttpGet]
         [Route("all")]
         public async Task<IActionResult> GetAll()

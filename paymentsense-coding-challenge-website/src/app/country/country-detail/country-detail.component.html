@@ -3,19 +3,55 @@
   <div class="row">
     <div class="col-3  display-label detail-label">Population:</div>
     <div class="col-3  display-values">
-      <p>Sunday, July 15, 2012</p>
+      <p>{{selectedCountry.population}}</p>
     </div>
   </div>
   <div class="row">
     <div class="col-3  display-label detail-label">Time Zones:</div>
     <div class="col-3  display-values">
-      <p>Sunday, July 15, 2012</p>
+      <li *ngFor="let timezone of selectedCountry.timezones" >
+        {{timezone}} 
+      </li>
     </div>
   </div>
   <div class="row">
-    <div class="col-3  display-label detail-label">Currency:</div>
+    <div class="col-3  display-label detail-label">Currencies :</div>
+    <div class="col-6  display-values">
+      <li *ngFor="let currency of selectedCountry.currencies" >
+        Symbol :{{currency.symbol}}  
+        name :{{currency.name}} 
+      </li>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3  display-label detail-label">Language:</div>
     <div class="col-3  display-values">
-      <p>Sunday, July 15, 2012</p>
+      <li *ngFor="let language of selectedCountry.languages" >
+        {{language.name}} 
+      </li>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3  display-label detail-label">Language:</div>
+    <div class="col-3  display-values">
+      <li *ngFor="let language of selectedCountry.languages" >
+        {{language.name}} 
+      </li>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3  display-label detail-label">Capital City :</div>
+    <div class="col-3  display-values">
+      <p>{{selectedCountry.capital }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3  display-label detail-label">Bordering Countries:</div>
+    <div class="col-3  display-values">
+      <li *ngFor="let country of selectedCountry.borderingCountries" >
+        {{country}} 
+      </li>
     </div>
   </div>
 </div>

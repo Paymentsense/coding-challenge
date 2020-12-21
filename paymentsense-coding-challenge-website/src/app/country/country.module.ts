@@ -7,6 +7,7 @@ import { CountryComponent } from './country.component';
 import { CountryDetailComponent } from './country-detail/country-detail.component';
 import { CountryListComponent } from './country-list/country-list.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule, MatCardModule} from '@angular/material';
 
 
 @NgModule({
@@ -16,6 +17,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     CountryRoutingModule,
     MatTableModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatCardModule
   ],
 })
 export class CountryModule { }

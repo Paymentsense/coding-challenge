@@ -3,33 +3,56 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { CountryService } from "src/app/services";
 import { Country } from "src/app/models/country";
+import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
+import { Router } from '@angular/router';
 
+@UntilDestroy()
 @Component({
   selector: "app-country-list",
   templateUrl: "./country-list.component.html",
   styleUrls: ["./country-list.component.scss"],
 })
 export class CountryListComponent implements OnInit {
-  countries: any;
+  dataSource: any;
+  countries: Country[];
   loading: boolean = true;
   paginator: any;
 
   @ViewChild(MatPaginator, { static: false }) set matPaginator(
     paginator: MatPaginator
   ) {
-    if (this.countries) {
-      this.countries.paginator = paginator;
+    if (this.dataSource) {
+      this.dataSource.paginator = paginator;
     }
   }
   displayedColumns: string[] = ["flag", "name"];
 
-  constructor(private countryService: CountryService) {}
+  constructor(private countryService: CountryService,private router: Router) {}
 
   ngOnInit() {
-    this.countryService.GetAllCountries().subscribe((data) => {
-      this.countries = new MatTableDataSource<Country>(data);
-      this.loading = false;
+    this.countryService
+      .GetAllCountries()
+      .pipe(untilDestroyed(this))
+      .subscribe((data) => {
+        this.dataSource = new MatTableDataSource<Country>(data);
+        this.countries = data;
+        this.loading = false;
+      });
+  }
+
+  selectRowRecord(selectedRow: any) {
+    //get countries' name from alpha3Code
+    let borderingCountries = selectedRow.borders.map((border) => {
+      return this.countries.find((country) => {
+        return country.alpha3Code == border;
+      }).name;
     });
+
+    //restructuring
+    selectedRow.borderingCountries=borderingCountries;
+
+    this.countryService.setSelectedCountry(selectedRow);
+
+    this.router.navigateByUrl('/country-detail');
   }
 }
-

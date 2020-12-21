@@ -25,6 +25,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-regular-svg-icons": "^5.11.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@ngneat/until-destroy": "^8.0.3",
     "bootstrap": "^4.5.3",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.2",

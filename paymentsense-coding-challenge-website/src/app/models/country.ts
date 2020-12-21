@@ -5,6 +5,7 @@ export interface Country {
   name: string;
   flag: string;
   population: number;
+  alpha3Code:string
   timezones: string[];
   currencies: Currency[];
   languages: Language[];
