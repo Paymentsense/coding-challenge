@@ -1,12 +1,21 @@
-import { TestBed } from '@angular/core/testing';
+import { CountryService } from ".";
+import { of } from 'rxjs';
 
-import { CountryService } from './country.service';
+let httpClientSpy: { get: jasmine.Spy };
+let countryService: CountryService;
 
-describe('CountryService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+beforeEach(() => {
+  // TODO: spy on other methods too
+  httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+  countryService = new CountryService(httpClientSpy as any);
+});
 
-  it('should be created', () => {
-    const service: CountryService = TestBed.get(CountryService);
-    expect(service).toBeTruthy();
-  });
+it('should return expected countries (HttpClient called once)', () => {
+  httpClientSpy.get.and.returnValue(of(null));
+
+  countryService.GetAllCountries().subscribe(
+    heroes => expect(heroes).toEqual(null, 'expected heroes'),
+    fail
+  );
+  expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
 });
