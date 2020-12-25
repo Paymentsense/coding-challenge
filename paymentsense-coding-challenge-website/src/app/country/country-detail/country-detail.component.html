@@ -1,56 +1,53 @@
 <div class="container">
   <h2>Country Details</h2>
   <div class="row">
-    <div class="col-3  display-label detail-label">Population:</div>
-    <div class="col-3  display-values">
-      <p>{{selectedCountry.population}}</p>
+    <div class="col-3 display-label detail-label">Country Name:</div>
+    <div class="col-3 display-values">
+      <p>{{ selectedCountry.name }}</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-3  display-label detail-label">Time Zones:</div>
-    <div class="col-3  display-values">
-      <li *ngFor="let timezone of selectedCountry.timezones" >
-        {{timezone}} 
+    <div class="col-3 display-label detail-label">Population:</div>
+    <div class="col-3 display-values">
+      <p>{{ selectedCountry.population | number }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3 display-label detail-label">Time Zones:</div>
+    <div class="col-3 display-values">
+      <li *ngFor="let timezone of selectedCountry.timezones">
+        {{ timezone }}
       </li>
     </div>
   </div>
   <div class="row">
-    <div class="col-3  display-label detail-label">Currencies :</div>
-    <div class="col-6  display-values">
-      <li *ngFor="let currency of selectedCountry.currencies" >
-        Symbol :{{currency.symbol}}  
-        name :{{currency.name}} 
+    <div class="col-3 display-label detail-label">Currencies :</div>
+    <div class="col-6 display-values">
+      <li *ngFor="let currency of selectedCountry.currencies">
+        Symbol :<span style="font-weight: bold"> {{ currency.symbol }} </span>
+        Name :<span style="font-weight: bold"> {{ currency.name }} </span>
       </li>
     </div>
   </div>
   <div class="row">
-    <div class="col-3  display-label detail-label">Language:</div>
-    <div class="col-3  display-values">
-      <li *ngFor="let language of selectedCountry.languages" >
-        {{language.name}} 
-      </li>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-3  display-label detail-label">Language:</div>
-    <div class="col-3  display-values">
-      <li *ngFor="let language of selectedCountry.languages" >
-        {{language.name}} 
+    <div class="col-3 display-label detail-label">Language:</div>
+    <div class="col-3 display-values">
+      <li *ngFor="let language of selectedCountry.languages">
+        {{ language.name }}
       </li>
     </div>
   </div>
   <div class="row">
-    <div class="col-3  display-label detail-label">Capital City :</div>
-    <div class="col-3  display-values">
-      <p>{{selectedCountry.capital }}</p>
+    <div class="col-3 display-label detail-label">Capital City :</div>
+    <div class="col-3 display-values">
+      <p>{{ selectedCountry.capital }}</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-3  display-label detail-label">Bordering Countries:</div>
-    <div class="col-3  display-values">
-      <li *ngFor="let country of selectedCountry.borderingCountries" >
-        {{country}} 
+    <div class="col-3 display-label detail-label">Bordering Countries:</div>
+    <div class="col-3 display-values">
+      <li *ngFor="let country of selectedCountry.borderingCountries">
+        {{ country }}
       </li>
     </div>
   </div>

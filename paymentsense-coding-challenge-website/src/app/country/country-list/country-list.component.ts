@@ -4,7 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { CountryService } from "src/app/services";
 import { Country } from "src/app/models/country";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
 
 @UntilDestroy()
 @Component({
@@ -16,7 +16,7 @@ export class CountryListComponent implements OnInit {
   dataSource: any;
   countries: Country[];
   loading: boolean = true;
-  paginator: any;
+  displayedColumns: string[] = ["flag", "name"];
 
   @ViewChild(MatPaginator, { static: false }) set matPaginator(
     paginator: MatPaginator
@@ -25,9 +25,8 @@ export class CountryListComponent implements OnInit {
       this.dataSource.paginator = paginator;
     }
   }
-  displayedColumns: string[] = ["flag", "name"];
 
-  constructor(private countryService: CountryService,private router: Router) {}
+  constructor(private countryService: CountryService, private router: Router) {}
 
   ngOnInit() {
     this.countryService
@@ -49,10 +48,10 @@ export class CountryListComponent implements OnInit {
     });
 
     //restructuring
-    selectedRow.borderingCountries=borderingCountries;
+    selectedRow.borderingCountries = borderingCountries;
 
     this.countryService.setSelectedCountry(selectedRow);
 
-    this.router.navigateByUrl('/country-detail');
+    this.router.navigateByUrl("/country-detail");
   }
 }

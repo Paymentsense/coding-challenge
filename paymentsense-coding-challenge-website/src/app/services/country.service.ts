@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Country } from "../models/country";
-import { EMPTY } from "rxjs";
+import { EMPTY, Observable, BehaviorSubject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { shareReplay,  catchError } from "rxjs/operators";
+import { shareReplay, catchError, finalize } from "rxjs/operators";
 import { untilDestroyed, UntilDestroy } from "@ngneat/until-destroy";
-const API_ENDPOINT = "https://localhost:44341/country/all";
+import { environment as env } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
@@ -12,22 +12,23 @@ const API_ENDPOINT = "https://localhost:44341/country/all";
 @UntilDestroy()
 export class CountryService {
   private selectedCountry: any;
-  cache = {};
+  private selectedCountrySource = new BehaviorSubject(this.selectedCountry);
+  currentCountry = this.selectedCountrySource.asObservable();
+
   constructor(private httpClient: HttpClient) {}
 
-  public GetAllCountries() {
-    return this.httpClient.get<Country[]>(API_ENDPOINT).pipe(
-      shareReplay(1),
-      catchError((err) => {
-        return EMPTY;
-      })
-    );
+  public GetAllCountries(): Observable<Country[]> {
+    return this.httpClient
+      .get<Country[]>(env.api_endpoint + "country/all")
+      .pipe(
+        catchError((err) => {
+          return EMPTY;
+        }),
+        finalize(() => console.log("call finished"))
+      );
   }
 
-  public getSelectedCountry() {
-    return this.selectedCountry;
-  }
-  public setSelectedCountry(country) {
-     this.selectedCountry=country;
+  setSelectedCountry(country: string) {
+    this.selectedCountrySource.next(country);
   }
 }

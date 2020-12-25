@@ -8,7 +8,7 @@ import { CountryListComponent } from './country-list.component';
 import { MatTableModule } from '@angular/material';
 import { of } from 'rxjs';
 
-describe('CountryDetailComponent', () => {
+describe('CountryListComponent', () => {
   let component: CountryListComponent;
   let fixture: ComponentFixture<CountryListComponent>;
   let mockCountryServices;

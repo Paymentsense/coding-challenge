@@ -9,14 +9,12 @@ import { CountryService } from "src/app/services";
 })
 export class CountryDetailComponent implements OnInit {
   selectedCountry: any;
-  constructor(
-    private countryService: CountryService,
-    private route: ActivatedRoute
-  ) {
-    //  this.alpha3Code = route.snapshot.params.id;
-  }
+
+  constructor(private countryService: CountryService) {}
 
   ngOnInit() {
-    this.selectedCountry = this.countryService.getSelectedCountry();
+    this.countryService.currentCountry.subscribe(
+      (current) => (this.selectedCountry = current)
+    );
   }
 }

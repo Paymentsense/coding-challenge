@@ -39,13 +39,14 @@ namespace Paymentsense.Coding.Challenge.Api
                         .AllowAnyHeader();
                 });
             });
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // Response Caching Middleware
-            app.UseResponseCaching();
+          
 
             if (env.IsDevelopment())
             {
@@ -65,6 +66,9 @@ namespace Paymentsense.Coding.Challenge.Api
                 endpoints.MapControllers();
                 endpoints.MapHealthChecks("/health");
             });
+
+            // Response Caching Middleware
+             app.UseResponseCaching();
         }
     }
 }
