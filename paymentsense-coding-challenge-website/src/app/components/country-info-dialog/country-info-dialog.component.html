@@ -1,0 +1,40 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="header-image" [ngStyle]="{'background-image': getUrl()}"></div>
+    <mat-card-title>{{country.name}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="facts">
+      <div class="title">Capital City:</div>
+      <div>{{country.capital}}</div>
+    </div>
+    <div class="facts">
+      <div class="title">Population:</div>
+      <div>{{country.population | number}}</div>
+    </div>
+    <div class="facts">
+      <div class="title">Languages:</div>
+      <div>
+        <div *ngFor="let language of country.languages">{{language.name}}</div>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="title">Currencies:</div>
+      <div>
+        <div *ngFor="let currency of country.currencies">{{currency.code}}</div>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="title">Borders:</div>
+      <div>
+        <div *ngFor="let border of country.borders">{{border}}</div>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="title">Time Zones:</div>
+      <div>
+        <div *ngFor="let timeZone of country.timeZones">{{timeZone}}</div>
+      </div>
+    </div>
+  </mat-card-content>  
+</mat-card>
