@@ -1,0 +1,8 @@
+<a [routerLink]="['country', country.alpha3Code]">
+  <p-card >
+    <div class="flex space-between">
+      <div data-test="name">{{country.name}}</div>
+      <img class="flag" [src]="country.flag" [alt]="country.name">
+    </div>
+  </p-card>
+</a>

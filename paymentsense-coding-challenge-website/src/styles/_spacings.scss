@@ -1,0 +1,48 @@
+@import "spacings-vars";
+
+.width-fill {
+  width: 100%;
+}
+
+.height-fill {
+  height: 100%;
+}
+
+.height-90p {
+  height: 90%;
+}
+
+.height-80p {
+  height: 80%;
+}
+
+.screen-fill {
+  min-height: 100vh;
+}
+
+@each $sizing-type-key, $sizing-type-value in $sizing-types {
+  @each $spacing-key, $spacing-value in $spacings {
+    @if $sizing-type-key != "p" or str-index($spacing-key, "n") == null {
+      .#{$sizing-type-key}-#{$spacing-key} {
+        #{$sizing-type-value}: #{$spacing-value};
+      }
+    }
+
+    @each $direction-key, $direction-value in $directions {
+      @if $sizing-type-key != "p" or str-index($spacing-key, "n") == null {
+        .#{$sizing-type-key}-#{$direction-key}-#{$spacing-key} {
+          $dir-str-length: str-length($direction-key);
+          @if $dir-str-length == 1 {
+            #{$sizing-type-value}-#{$direction-value}: #{$spacing-value};
+          } @else {
+            $first-dir: map-get($directions, str-slice($direction-key, 1, 1));
+            $second-dir: map-get($directions, str-slice($direction-key, 2, 2));
+
+            #{$sizing-type-value}-#{$first-dir}: #{$spacing-value};
+            #{$sizing-type-value}-#{$second-dir}: #{$spacing-value};
+          }
+        }
+      }
+    }
+  }
+}

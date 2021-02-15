@@ -1,0 +1,8 @@
+<ng-container *ngIf="paginationMeta$ | async as pageMeta">
+  <p-paginator
+    [rows]="pageMeta.take"
+    [totalRecords]="pageMeta.totalItems"
+    [showJumpToPageDropdown]="true" 
+    (onPageChange)="paginate($event)">
+  </p-paginator>
+</ng-container>
