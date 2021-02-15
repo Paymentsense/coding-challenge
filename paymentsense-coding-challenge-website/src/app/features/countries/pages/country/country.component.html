@@ -1,0 +1,9 @@
+<a routerLink="">Back</a>
+<div>
+<ng-container *ngIf="country$ | async as country else loadingTemplate">
+  <app-country-information [country]="country"></app-country-information>
+</ng-container>
+<ng-template #loadingTemplate>
+  <p-progressSpinner></p-progressSpinner>
+</ng-template>
+</div>

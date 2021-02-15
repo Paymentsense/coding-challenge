@@ -6,13 +6,13 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Paymentsense.Coding.Challenge.Api.Tests
+namespace Paymentsense.Coding.Challenge.Api.Tests.Integration
 {
-    public class HealthcheckTests
+    public class CountriesTests
     {
         private readonly HttpClient _client;
 
-        public HealthcheckTests()
+        public CountriesTests()
         {
             var builder = new WebHostBuilder().UseStartup<Startup>();
             var testServer = new TestServer(builder);
@@ -20,13 +20,21 @@ namespace Paymentsense.Coding.Challenge.Api.Tests
         }
 
         [Fact]
-        public async Task Health_OnInvoke_ReturnsHealthy()
+        public async Task Countries_Pagination_OnInvoke_ReturnsValidResponse()
         {
-            var response = await _client.GetAsync("/health");
+            var response = await _client.GetAsync("countries/pagination?page=1&take=10");
             var responseString = await response.Content.ReadAsStringAsync();
 
             response.StatusCode.Should().Be(StatusCodes.Status200OK);
-            responseString.Should().Be("Healthy");
+            responseString.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task Countries_Pagination_OnInvoke_ReturnsBadRequest()
+        {
+            var response = await _client.GetAsync("countries/pagination?page=1;take=0");
+
+            response.StatusCode.Should().Be(StatusCodes.Status400BadRequest);
         }
     }
 }

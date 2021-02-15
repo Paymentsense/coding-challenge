@@ -1,0 +1,22 @@
+<h2 data-test="name">{{country.name}}</h2>
+<img class="flag" [src]="country.flag" [alt]="country.name">
+<h3>Capital</h3>
+<div data-test="capital">{{country.capital}}</div>
+<h3 >Languages</h3>
+<ul>
+  <li data-test="language" *ngFor="let language of country.languages">{{language.name}}</li>
+</ul>
+<h3>Population</h3>
+<div data-test="population">{{country.population | number}} people</div>
+<h3 >Time Zones</h3>
+<ul>
+  <li data-test="timezone" *ngFor="let timezone of country.timezones">{{timezone}}</li>
+</ul>
+<h3 >Currencies</h3>
+<ul>
+  <li data-test="currency" *ngFor="let currency of country.currencies">{{currency.name}} ({{currency.symbol}})</li>
+</ul>
+<h3 >Bordering Countries</h3>
+<ul>
+  <li data-test="border" *ngFor="let border of country.borders">{{border}}</li>
+</ul>
