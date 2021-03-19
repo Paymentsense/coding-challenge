@@ -7,4 +7,20 @@ export interface Country {
   subRegion: string;
   population: number;
   flag: string;
+  borders: string[];
+  timezones: string[];
+  languages: Languages[];
+  currency: Currencies[];
+}
+
+interface Languages {
+  name: string;
+  iso639_1?: string;
+  iso639_2?: string;
+}
+
+interface Currencies {
+  code: string;
+  name: string;
+  symbol?: string;
 }

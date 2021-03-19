@@ -37,6 +37,10 @@ export class CountryListingComponent implements OnInit, OnDestroy {
     });
   }
 
+  showCountryFullDetails(countryName: string): void {
+    console.log(countryName);
+  }
+
   pageThroughCountries(from: number, to: number): Country[] {
     return this.totalListOfCountries.slice(from, to);
   }
