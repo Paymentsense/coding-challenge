@@ -12,13 +12,16 @@ import {takeUntil} from 'rxjs/operators';
 export class CountryListingComponent implements OnInit, OnDestroy {
 
   destroy$ = new Subject<boolean>();
+  totalListOfCountries: Country[];
   listOfCountries: Country[];
+  loading = false;
 
   constructor(private countriesService: CountriesService) {
   }
 
   ngOnInit() {
     this.fetchAllCountries();
+    this.loading = true;
   }
 
   ngOnDestroy() {
@@ -28,8 +31,20 @@ export class CountryListingComponent implements OnInit, OnDestroy {
 
   fetchAllCountries(): void {
     this.countriesService.getAllCountries().pipe(takeUntil(this.destroy$)).subscribe(listOfCountries => {
-      this.listOfCountries = listOfCountries;
+      this.totalListOfCountries = listOfCountries;
+      this.listOfCountries = this.pageThroughCountries(0, 10);
+      this.loading = false;
     });
+  }
+
+  pageThroughCountries(from: number, to: number): Country[] {
+    return this.totalListOfCountries.slice(from, to);
+  }
+
+  pageChangeHandler($event): void {
+    const from = $event.pageIndex * $event.pageSize;
+    const to = from + $event.pageSize;
+    this.listOfCountries = this.pageThroughCountries(from, to);
   }
 
 }

@@ -8,7 +8,7 @@ import { PaymentsenseCodingChallengeApiService } from './services';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {CountryListingComponent} from './countries/country-listing.component';
-import {MatListModule} from '@angular/material';
+import {MatListModule, MatPaginatorModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -22,6 +22,7 @@ import {MatListModule} from '@angular/material';
     HttpClientModule,
     FontAwesomeModule,
     MatListModule,
+    MatPaginatorModule,
   ],
   providers: [PaymentsenseCodingChallengeApiService],
   bootstrap: [AppComponent]
