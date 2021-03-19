@@ -1,0 +1,9 @@
+<div class="mat-card">
+  <div class="mat-card-title">
+    List of All Countries
+  </div>
+  <mat-list *ngFor="let country of listOfCountries">
+    <mat-list-item><img class="flag" [alt]="country.name" [src]="country.flag" /> &nbsp;{{country.name}}  </mat-list-item>
+  </mat-list>
+
+</div>
