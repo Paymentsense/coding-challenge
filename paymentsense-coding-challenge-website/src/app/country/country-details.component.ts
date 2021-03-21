@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CountriesService} from '../services';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {switchMap, takeUntil} from 'rxjs/operators';
 import {Observable, Subject} from 'rxjs';
 import {Country} from '../services/models/country';
@@ -16,7 +16,7 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
   selectedCountryName: string;
   selectedCountry: Country;
 
-  constructor(private countriesService: CountriesService, private route: ActivatedRoute) {
+  constructor(private countriesService: CountriesService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
@@ -39,6 +39,10 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
     this.country$.pipe(takeUntil(this.destroy$)).subscribe(country => {
       this.selectedCountry = country;
     });
+  }
+
+  goToFullListing(): void {
+    this.router.navigate(['/countries']);
   }
 
 }

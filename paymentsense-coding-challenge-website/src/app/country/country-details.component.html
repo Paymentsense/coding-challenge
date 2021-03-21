@@ -8,6 +8,9 @@
     <p>Bordering Countries: {{this.selectedCountry.borders}}</p>
     <p>Time Zones: {{this.selectedCountry.timezones}}</p>
   </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="goToFullListing()">Back to Full List</button>
+  </mat-card-actions>
 </mat-card>
 
 <app-loader *ngIf="!this.selectedCountry"></app-loader>

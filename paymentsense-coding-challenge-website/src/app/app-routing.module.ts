@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {CountryListingComponent} from './countries/country-listing.component';
 import {CountryDetailsComponent} from './country/country-details.component';
+import {ResultsNotFoundComponent} from './results-not-found/results-not-found.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,10 @@ const routes: Routes = [
     component: CountryListingComponent
   }, {
     path: 'country/:name',
-    component: CountryDetailsComponent
+    component: CountryDetailsComponent,
+  }, {
+    path: 'noresults',
+    component: ResultsNotFoundComponent
   },
   {
     path: '**',

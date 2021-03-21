@@ -27,4 +27,8 @@ export class CountriesService {
       )
     );
   }
+
+  searchForCountry(searchTerm: string) {
+    return this.filterCountryByName(searchTerm);
+  }
 }
