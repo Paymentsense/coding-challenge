@@ -1,0 +1,16 @@
+<mat-card class="countryDetails" *ngIf="this.selectedCountry">
+  <mat-card-title>{{ this.selectedCountry.name}}</mat-card-title>
+  <mat-card-content>
+    <p>Capital City: {{this.selectedCountry.capital}}</p>
+    <p>Population: {{this.selectedCountry.population}}</p>
+    <p>Language: {{this.selectedCountry.languages[0].name}}</p>
+    <p>Currencies: {{this.selectedCountry.currency}}</p>
+    <p>Bordering Countries: {{this.selectedCountry.borders}}</p>
+    <p>Time Zones: {{this.selectedCountry.timezones}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="goToFullListing()">Back to Full List</button>
+  </mat-card-actions>
+</mat-card>
+
+<app-loader *ngIf="!this.selectedCountry"></app-loader>

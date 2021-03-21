@@ -1,0 +1,15 @@
+<div class="mat-card" *ngIf="!loading">
+  <div class="mat-card-title">
+    List of All Countries
+  </div>
+  <mat-list *ngFor="let country of listOfCountries">
+    <mat-list-item><img class="flag" [alt]="country.name" [src]="country.flag"/> &nbsp;
+      <a [routerLink]="['/country',  country.name ]">{{country.name}}</a>
+    </mat-list-item>
+  </mat-list>
+  <mat-paginator [length]="totalListOfCountries.length" [pageSize]="10" [pageSizeOptions]="[5,10,15,20]"
+                 (page)="pageChangeHandler($event)">
+  </mat-paginator>
+</div>
+<app-loader *ngIf="loading"></app-loader>
+

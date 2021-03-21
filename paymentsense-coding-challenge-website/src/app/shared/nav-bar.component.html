@@ -1,0 +1,14 @@
+
+<div class="navigation">
+  <img alt="Paymentsense Logo" src="../assets/paymentsense-logo.svg">
+  <span>
+    {{ title }}
+  </span>
+  <div class="search-box">
+    <mat-form-field>
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <input matInput placeholder="Search" [formControl]="searchTerm" required />
+    </mat-form-field>
+    <button mat-button-raised (click)="searchHandler()" [disabled]="!searchTerm.value">Search</button>
+  </div>
+</div>
