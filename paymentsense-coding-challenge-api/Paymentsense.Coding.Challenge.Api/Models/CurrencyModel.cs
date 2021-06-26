@@ -1,9 +1,11 @@
-﻿namespace Paymentsense.Coding.Challenge.Api.Models
+﻿using System.Text.Json.Serialization;
+
+namespace Paymentsense.Coding.Challenge.Api.Models
 {
     public class CurrencyModel
     {
-        public string code { get; set; }
-        public string name { get; set; }
-        public string symbol { get; set; }
+        [JsonPropertyName("code")] public string Code { get; set; }
+        [JsonPropertyName("name")] public string Name { get; set; }
+        [JsonPropertyName("symbol")] public string Symbol { get; set; }
     }
 }
