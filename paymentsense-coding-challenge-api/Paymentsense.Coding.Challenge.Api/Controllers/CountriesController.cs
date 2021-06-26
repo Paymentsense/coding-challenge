@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Paymentsense.Coding.Challenge.Api.Models;
+using Paymentsense.Coding.Challenge.Api.Services;
 
 namespace Paymentsense.Coding.Challenge.Api.Controllers
 {
@@ -11,27 +10,20 @@ namespace Paymentsense.Coding.Challenge.Api.Controllers
     [Route("[controller]")]
     public class CountriesController : ControllerBase
     {
-        private static List<CountryModel> Countries { get; set; } = new List<CountryModel>();
+        private readonly ICountriesService _countriesService;
 
-        [HttpGet]
-        public async Task<ActionResult<string>> Get()
+        public CountriesController(ICountriesService countriesService)
         {
-            if (Countries.Count == 0)
-            {
-                await PopulateCountries();
-            }
-
-            return Ok(Countries);
+            _countriesService = countriesService;
         }
 
 
-        private static async Task PopulateCountries()
+        [HttpGet]
+        public async Task<ActionResult<List<CountryModel>>> Get()
         {
-            using var client = new HttpClient();
-            var responseStream = client.GetStreamAsync(
-                "https://restcountries.eu/rest/v2/all?fields=name;flag;population;timezones;currencies;language;capital;borders");
+            var countries = await _countriesService.GetCountries();
 
-            Countries = await JsonSerializer.DeserializeAsync<List<CountryModel>>(await responseStream);
+            return Ok(countries);
         }
     }
 }

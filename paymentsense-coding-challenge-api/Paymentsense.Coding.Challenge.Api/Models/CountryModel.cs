@@ -13,5 +13,6 @@ namespace Paymentsense.Coding.Challenge.Api.Models
         [JsonPropertyName("population")] public int Population { get; set; }
         [JsonPropertyName("timezones")] public string[] Timezones { get; set; }
         [JsonPropertyName("borders")] public string[] Borders { get; set; }
+        [JsonPropertyName("languages")] public Language[] Languages { get; set; }
     }
 }

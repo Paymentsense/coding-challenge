@@ -5,8 +5,4 @@
     <StartupObject>Paymentsense.Coding.Challenge.Api.Program</StartupObject>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>
