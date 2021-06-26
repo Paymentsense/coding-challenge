@@ -34,6 +34,7 @@ namespace Paymentsense.Coding.Challenge.Api
             services.AddScoped<ICountriesService, CountriesService>();
             services.AddScoped<ICountriesApiClient, CountriesApiClient>();
             services.AddScoped<ICountryCache, CountryCache>();
+            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

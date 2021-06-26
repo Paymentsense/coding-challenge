@@ -8,9 +8,16 @@ namespace Paymentsense.Coding.Challenge.Api.Clients
 {
     internal class CountriesApiClient : ICountriesApiClient
     {
+        private readonly IHttpClientFactory _clientFactory;
+
+        public CountriesApiClient(IHttpClientFactory clientFactory)
+        {
+            _clientFactory = clientFactory;
+        }
+
         public async Task<List<CountryModel>> GetCountries()
         {
-            using var client = new HttpClient();
+            using var client = _clientFactory.CreateClient();
             var responseStream = client.GetStreamAsync(
                 "https://restcountries.eu/rest/v2/all?fields=name;flag;population;timezones;currencies;languages;capital;borders");
 
