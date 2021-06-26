@@ -30,16 +30,16 @@ namespace Paymentsense.Coding.Challenge.Api.Tests.Controllers
             var countriesMock = new List<CountryModel>() {country};
 
             var mockCountriesService = new Mock<ICountriesService>();
-            mockCountriesService.Setup(c => c.GetCountries()).ReturnsAsync(countriesMock);
+            mockCountriesService.Setup(c => c.GetCountries(null, null)).ReturnsAsync(countriesMock);
 
             var controller = new CountriesController(mockCountriesService.Object);
 
-            var result = (await controller.Get()).Result as OkObjectResult;
+            var result = (await controller.Get(null, null)).Result as OkObjectResult;
 
             result.StatusCode.Should().Be(StatusCodes.Status200OK);
             result.Value.Should().BeOfType<List<CountryModel>>();
             result.Value.Should().Be(countriesMock);
-            mockCountriesService.Verify(c => c.GetCountries(), Times.Once);
+            mockCountriesService.Verify(c => c.GetCountries(null, null), Times.Once);
         }
     }
 }

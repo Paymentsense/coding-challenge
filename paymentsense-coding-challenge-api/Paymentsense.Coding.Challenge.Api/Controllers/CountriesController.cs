@@ -19,9 +19,9 @@ namespace Paymentsense.Coding.Challenge.Api.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<List<CountryModel>>> Get()
+        public async Task<ActionResult<List<CountryModel>>> Get(int? pageNumber, int? page)
         {
-            var countries = await _countriesService.GetCountries();
+            var countries = await _countriesService.GetCountries(null, null);
 
             return Ok(countries);
         }

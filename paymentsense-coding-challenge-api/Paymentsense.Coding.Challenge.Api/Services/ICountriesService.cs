@@ -6,6 +6,6 @@ namespace Paymentsense.Coding.Challenge.Api.Services
 {
     public interface ICountriesService
     {
-        Task<List<CountryModel>> GetCountries();
+        Task<List<CountryModel>> GetCountries(int? pageNumber, int? page);
     }
 }

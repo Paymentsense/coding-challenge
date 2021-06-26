@@ -5,7 +5,7 @@ namespace Paymentsense.Coding.Challenge.Api.Clients
 {
     public class CountryCache : ICountryCache
     {
-        public static List<CountryModel> Countries { get; private set; } = new List<CountryModel>();
+        private static List<CountryModel> Countries { get; set; } = new List<CountryModel>();
 
         public List<CountryModel> GetCountries()
         {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,11 +30,11 @@ namespace Paymentsense.Coding.Challenge.Api.Tests.Services
                 Borders = new[] {"IRL"}
             };
 
-            _countriesMock = new List<CountryModel>() {country};
+            _countriesMock = Enumerable.Range(1, 100).Select(x => country).ToList();
         }
 
         [Fact]
-        public async void GetCountries_OnInvoke_ReturnsCountriesFromApiClientFirstCall()
+        public async void GetCountries_OnInvoke_ReturnsCountriesFromApiClientFirstCall_NoPagination()
         {
             var mockCountriesApiClient = new Mock<ICountriesApiClient>();
             mockCountriesApiClient.Setup(c => c.GetCountries()).ReturnsAsync(_countriesMock);
@@ -42,7 +43,7 @@ namespace Paymentsense.Coding.Challenge.Api.Tests.Services
             mockCache.Setup(c => c.GetCountries()).Returns(new List<CountryModel>());
             var countriesService = new CountriesService(mockCache.Object, mockCountriesApiClient.Object);
 
-            var result = await countriesService.GetCountries();
+            var result = await countriesService.GetCountries(null, null);
 
             result.Should().BeOfType<List<CountryModel>>();
             result.Should().BeSameAs(_countriesMock);
@@ -51,7 +52,7 @@ namespace Paymentsense.Coding.Challenge.Api.Tests.Services
         }
 
         [Fact]
-        public async void GetCountries_OnInvoke_PopulatesCacheOnFirstCall()
+        public async void GetCountries_OnInvoke_PopulatesCacheOnFirstCall_NoPagination()
         {
             var mockCountriesApiClient = new Mock<ICountriesApiClient>();
             mockCountriesApiClient.Setup(c => c.GetCountries()).ReturnsAsync(_countriesMock);
@@ -60,14 +61,14 @@ namespace Paymentsense.Coding.Challenge.Api.Tests.Services
             mockCache.Setup(c => c.GetCountries()).Returns(new List<CountryModel>());
             var countriesService = new CountriesService(mockCache.Object, mockCountriesApiClient.Object);
 
-            var result = await countriesService.GetCountries();
+            var result = await countriesService.GetCountries(null, null);
             mockCache.Verify(c => c.PopulateCountries(result), Times.Once);
 
             mockCache.Verify(c => c.GetCountries(), Times.Once);
         }
 
         [Fact]
-        public async void GetCountries_OnInvoke_ReturnsCountriesFromCacheSecondCall()
+        public async void GetCountries_OnInvoke_ReturnsCountriesFromCacheSecondCall_NoPagination()
         {
             var mockCountriesApiClient = new Mock<ICountriesApiClient>();
 
@@ -75,12 +76,44 @@ namespace Paymentsense.Coding.Challenge.Api.Tests.Services
             mockCache.Setup(c => c.GetCountries()).Returns(_countriesMock);
             var countriesService = new CountriesService(mockCache.Object, mockCountriesApiClient.Object);
 
-            var result = await countriesService.GetCountries();
+            var result = await countriesService.GetCountries(null, null);
 
             result.Should().BeOfType<List<CountryModel>>();
             result.Should().BeSameAs(_countriesMock);
             mockCountriesApiClient.Verify(c => c.GetCountries(), Times.Never);
             mockCache.Verify(c => c.GetCountries(), Times.Once);
+        }
+
+        [Fact]
+        public async void GetCountries_OnInvoke_Returns10Countries_Pagination()
+        {
+            var mockCountriesApiClient = new Mock<ICountriesApiClient>();
+            mockCountriesApiClient.Setup(c => c.GetCountries()).ReturnsAsync(_countriesMock);
+
+            var mockCache = new Mock<ICountryCache>();
+            mockCache.Setup(c => c.GetCountries()).Returns(new List<CountryModel>());
+            var countriesService = new CountriesService(mockCache.Object, mockCountriesApiClient.Object);
+
+            var result = await countriesService.GetCountries(10, 0);
+
+            result.Should().HaveCount(10);
+        }
+
+        [Fact]
+        public async void GetCountries_OnInvoke_ReturnsDifferent10Countries_Pagination()
+        {
+            var mockCountriesApiClient = new Mock<ICountriesApiClient>();
+            mockCountriesApiClient.Setup(c => c.GetCountries()).ReturnsAsync(_countriesMock);
+
+            var mockCache = new Mock<ICountryCache>();
+            mockCache.Setup(c => c.GetCountries()).Returns(new List<CountryModel>());
+            var countriesService = new CountriesService(mockCache.Object, mockCountriesApiClient.Object);
+
+            var result = await countriesService.GetCountries(10, 0);
+            var resultNextPage = await countriesService.GetCountries(10, 1);
+            result.Should().HaveCount(10);
+            resultNextPage.Should().HaveCount(10);
+            resultNextPage.Should().NotBeSameAs(result);
         }
     }
 }
