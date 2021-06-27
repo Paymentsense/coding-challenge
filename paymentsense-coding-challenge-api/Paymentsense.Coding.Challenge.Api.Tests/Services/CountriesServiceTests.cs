@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Paymentsense.Coding.Challenge.Api.Clients;
-using Paymentsense.Coding.Challenge.Api.Controllers;
 using Paymentsense.Coding.Challenge.Api.Models;
 using Paymentsense.Coding.Challenge.Api.Services;
 using Xunit;
@@ -34,7 +31,7 @@ namespace Paymentsense.Coding.Challenge.Api.Tests.Services
         }
 
         [Fact]
-        public async void GetCountries_OnInvoke_ReturnsCountriesFromApiClientFirstCall_NoPagination()
+        public async void GetCountries_ReturnsCountriesFromApiClientFirstCall_NoPagination()
         {
             var mockCountriesApiClient = new Mock<ICountriesApiClient>();
             mockCountriesApiClient.Setup(c => c.GetCountries()).ReturnsAsync(_countriesMock);
@@ -52,7 +49,7 @@ namespace Paymentsense.Coding.Challenge.Api.Tests.Services
         }
 
         [Fact]
-        public async void GetCountries_OnInvoke_PopulatesCacheOnFirstCall_NoPagination()
+        public async void GetCountries_PopulatesCacheOnFirstCall_NoPagination()
         {
             var mockCountriesApiClient = new Mock<ICountriesApiClient>();
             mockCountriesApiClient.Setup(c => c.GetCountries()).ReturnsAsync(_countriesMock);
@@ -68,7 +65,7 @@ namespace Paymentsense.Coding.Challenge.Api.Tests.Services
         }
 
         [Fact]
-        public async void GetCountries_OnInvoke_ReturnsCountriesFromCacheSecondCall_NoPagination()
+        public async void GetCountries_ReturnsCountriesFromCacheSecondCall_NoPagination()
         {
             var mockCountriesApiClient = new Mock<ICountriesApiClient>();
 
@@ -85,7 +82,7 @@ namespace Paymentsense.Coding.Challenge.Api.Tests.Services
         }
 
         [Fact]
-        public async void GetCountries_OnInvoke_Returns10Countries_Pagination()
+        public async void GetCountries_Returns10Countries_Pagination()
         {
             var mockCountriesApiClient = new Mock<ICountriesApiClient>();
             mockCountriesApiClient.Setup(c => c.GetCountries()).ReturnsAsync(_countriesMock);
@@ -100,7 +97,7 @@ namespace Paymentsense.Coding.Challenge.Api.Tests.Services
         }
 
         [Fact]
-        public async void GetCountries_OnInvoke_ReturnsDifferent10Countries_Pagination()
+        public async void GetCountries_ReturnsDifferent10Countries_Pagination()
         {
             var mockCountriesApiClient = new Mock<ICountriesApiClient>();
             mockCountriesApiClient.Setup(c => c.GetCountries()).ReturnsAsync(_countriesMock);

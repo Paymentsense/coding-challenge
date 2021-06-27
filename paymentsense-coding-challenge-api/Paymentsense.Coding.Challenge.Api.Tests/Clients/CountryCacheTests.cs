@@ -1,13 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
 using Paymentsense.Coding.Challenge.Api.Clients;
-using Paymentsense.Coding.Challenge.Api.Controllers;
 using Paymentsense.Coding.Challenge.Api.Models;
-using Paymentsense.Coding.Challenge.Api.Services;
 using Xunit;
 
 namespace Paymentsense.Coding.Challenge.Api.Tests.Clients

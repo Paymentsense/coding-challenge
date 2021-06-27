@@ -6,15 +6,22 @@ namespace Paymentsense.Coding.Challenge.Api.Clients
     public class CountryCache : ICountryCache
     {
         private static List<CountryModel> Countries { get; set; } = new List<CountryModel>();
+        private static readonly object CountriesLock = new object();
 
         public List<CountryModel> GetCountries()
         {
-            return Countries;
+            lock (CountriesLock)
+            {
+                return Countries;
+            }
         }
 
         public void PopulateCountries(List<CountryModel> countries)
         {
-            Countries = countries;
+            lock (CountriesLock)
+            {
+                Countries = countries;
+            }
         }
     }
 }
