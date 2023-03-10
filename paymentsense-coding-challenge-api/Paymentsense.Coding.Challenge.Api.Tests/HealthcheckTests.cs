@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -25,7 +26,7 @@ namespace Paymentsense.Coding.Challenge.Api.Tests
             var response = await _client.GetAsync("/health");
             var responseString = await response.Content.ReadAsStringAsync();
 
-            response.StatusCode.Should().Be(StatusCodes.Status200OK);
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
             responseString.Should().Be("Healthy");
         }
     }
